@@ -1,6 +1,8 @@
 from django.contrib import admin
 
-from .models import Question, Choice
+from .models import Game, Category, Clue, Answer
 
-admin.site.register(Question)
-admin.site.register(Choice)
+admin.site.register(Game)
+admin.site.register(Category)
+admin.site.register(Clue)
+admin.site.register(Answer)

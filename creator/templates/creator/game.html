@@ -1,0 +1,9 @@
+<h1>{{ game.name }}</h1>
+
+<table style="width:100%">
+    <tr>
+        {% for category in game.category_set.all %}
+            <th>{{ category.name }}</th>
+        {% endfor %}
+    </tr>
+</table>

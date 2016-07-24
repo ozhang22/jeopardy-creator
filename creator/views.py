@@ -1,45 +1,21 @@
-from django.core.urlresolvers import reverse
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render
-from django.utils import timezone
 from django.views import generic
 
-from .models import Question, Choice
+from .models import User, Game, Category, Clue, Answer
 
 
 class IndexView(generic.ListView):
     template_name = 'creator/index.html'
-    context_object_name = 'latest_question_list'
+    context_object_name = 'all_users'
 
     def get_queryset(self):
-        """Return the last five published questions."""
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+        return User.objects.all
 
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = 'creator/detail.html'
+class UserView(generic.DetailView):
+    model = User
+    template_name = 'creator/user.html'
 
 
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'creator/results.html'
-
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(request, 'creator/detail.html', {
-            'question': question,
-            'error_message': "You didn't select a choice.",
-        })
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('creator:results', args=(question.id,)))
+class GameView(generic.DetailView):
+    model = Game
+    template_name = 'creator/game.html'

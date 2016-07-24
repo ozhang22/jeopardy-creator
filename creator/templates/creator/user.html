@@ -1,0 +1,9 @@
+{% if user.game_set.all %}
+    <ul>
+    {% for game in user.game_set.all %}
+        <li><a href="{% url 'creator:game' game.id %}">{{ game.name }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No games are available.</p>
+{% endif %}
