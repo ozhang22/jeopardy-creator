@@ -1,3 +1,7 @@
+{% load staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'creator/styles.css' %}" />
+
 {% if user.is_authenticated %}
     <h4><a href="{% url 'creator:logout_user' %}">Logout</a></h4>
 {% else %}
@@ -6,10 +10,51 @@
 
 <h1>{{ game.name }}</h1>
 
-<table style="width:100%">
+<table>
     <tr>
         {% for category in game.category_set.all %}
             <th>{{ category.name }}</th>
         {% endfor %}
     </tr>
+    <tr>
+        <td>$200</td>
+        <td>$200</td>
+        <td>$200</td>
+        <td>$200</td>
+        <td>$200</td>
+        <td>$200</td>
+    </tr>
+    <tr>
+        <td>$400</td>
+        <td>$400</td>
+        <td>$400</td>
+        <td>$400</td>
+        <td>$400</td>
+        <td>$400</td>
+    </tr>
+    <tr>
+        <td>$600</td>
+        <td>$600</td>
+        <td>$600</td>
+        <td>$600</td>
+        <td>$600</td>
+        <td>$600</td>
+    </tr>
+    <tr>
+        <td>$800</td>
+        <td>$800</td>
+        <td>$800</td>
+        <td>$800</td>
+        <td>$800</td>
+        <td>$800</td>
+    </tr>
+    <tr>
+        <td>$1000</td>
+        <td>$1000</td>
+        <td>$1000</td>
+        <td>$1000</td>
+        <td>$1000</td>
+        <td>$1000</td>
+    </tr>
+
 </table>

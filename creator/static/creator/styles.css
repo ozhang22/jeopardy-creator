@@ -1,7 +1,26 @@
-li a {
-    color: green;
+table {
+    width:100%
 }
 
-body {
-    background: white url("images/pycharm_logo.png") no-repeat right bottom;
+table, th, td {
+    background-color: blue;
+    border-collapse: collapse;
+    border: 5px solid black;
+}
+
+th {
+    color: white;
+    font-size: 25px;
+    height: 80px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px black;
+}
+
+td {
+    color: yellow;
+    font-size: 40px;
+    font-weight: bold;
+    height: 80px;
+    text-align: center;
+    text-shadow: 3px 3px black;
 }
