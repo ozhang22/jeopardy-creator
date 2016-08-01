@@ -2,6 +2,12 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'creator/styles.css' %}" />
 
+{% if user.is_authenticated %}
+    <h4><a href="{% url 'creator:logout_user' %}">Logout</a></h4>
+{% else %}
+    <h4><a href="{% url 'creator:login_user' %}">Login</a></h4>
+{% endif %}
+
 {% if all_users %}
     <ul>
     {% for user in all_users %}
