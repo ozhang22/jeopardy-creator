@@ -9,4 +9,5 @@ urlpatterns = [
     url(r'^logout$', views.logout_user, name='logout_user'),
     url(r'^user/(?P<pk>[0-9]+)/$', views.UserView.as_view(), name='user'),
     url(r'^game/(?P<pk>[0-9]+)/$', views.GameView.as_view(), name='game'),
+    url(r'^get_clue/$', views.get_clue, name='get_clue'),
 ]

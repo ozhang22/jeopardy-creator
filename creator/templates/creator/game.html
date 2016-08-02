@@ -1,6 +1,7 @@
 {% load staticfiles %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'creator/styles.css' %}" />
+<script type="text/javascript" src="{% static 'jquery-3.1.0.js' %}"></script>
 
 {% if user.is_authenticated %}
     <h4><a href="{% url 'creator:logout_user' %}">Logout</a></h4>
@@ -58,3 +59,17 @@
     </tr>
 
 </table>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $("td").click(function() {
+        var row = this.parentNode.rowIndex;
+        var column = this.cellIndex;
+        var game_id = {{ game.id }};
+        alert("Clicked cell (" + row + "," + column + ")");
+        $.get('/main/get_clue/', {row_index: row, column_index: column, game_id: game_id}, function(data) {
+            alert(data);
+        });
+    });
+});
+</script>

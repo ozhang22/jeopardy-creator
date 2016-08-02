@@ -1,7 +1,9 @@
 from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
+from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
+from django.template import RequestContext
 from django.views import generic
 
 from .models import User, Game, Category, Clue, Answer
@@ -49,3 +51,24 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     return HttpResponseRedirect(reverse('creator:index', args=()))
+
+
+def get_clue(request):
+    context = RequestContext(request)
+    row_index = None
+    column_index = None
+    game = None
+    if request.method == 'GET':
+        row_index = request.GET['row_index']
+        column_index = request.GET['column_index']
+        game = Game.objects.get(pk=request.GET['game_id'])
+
+    if row_index and column_index and Game:
+        category = game.category_set.all()[int(column_index)]
+        if int(row_index) == 1:
+            clue = category.clue_set.first()
+        else:
+            clue = category.clue_set.all()[int(row_index) - 1]
+        return HttpResponse(clue.clue_text)
+
+    return HttpResponse("")
