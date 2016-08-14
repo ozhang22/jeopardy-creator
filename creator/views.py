@@ -2,10 +2,11 @@ from django.contrib.auth import authenticate, login, logout
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, render_to_response
 from django.template import RequestContext
 from django.views import generic
 
+from creator.forms import UserForm
 from .models import User, Game, Category, Clue, Answer
 
 
@@ -25,6 +26,37 @@ class UserView(generic.DetailView):
 class GameView(generic.DetailView):
     model = Game
     template_name = 'creator/game.html'
+
+
+def register_user(request):
+    context = RequestContext(request)
+
+    if request.method == 'POST':
+        user_form = UserForm(data=request.POST)
+
+        if user_form.is_valid():
+            user = user_form.save()
+            user.set_password(user.password)
+            user.save()
+
+            user = authenticate(
+                username=user_form.cleaned_data['username'],
+                password=user_form.cleaned_data['password'],
+            )
+            login(request, user)
+
+            return HttpResponseRedirect(reverse('creator:user', args=(user.id,)))
+        else:
+            return render_to_response('creator/register.html', {
+                    'user_form': user_form,
+                    'error_message': 'You have entered invalid fields. Please try again.',
+                }, context)
+    else:
+        user_form = UserForm()
+
+        return render_to_response('creator/register.html', {
+                'user_form': user_form,
+            }, context)
 
 
 def login_user(request):

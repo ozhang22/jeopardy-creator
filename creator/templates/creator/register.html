@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rango</title>
+    </head>
+
+    <body>
+        <h1>Register for Jeopardy Creator</h1>
+
+        {% if error_message %}
+            <h3>Error registering: {{ error_message }}</h3>
+        {% endif %}
+        <strong>Register as a new user:</strong><br />
+
+            <form id="user_form" method="post" action="{% url 'creator:register_user' %}"
+                enctype="multipart/form-data">
+
+                {% csrf_token %}
+
+                {{ user_form.as_p }}
+
+                <!-- Provide a button to click to submit the form. -->
+                <input type="submit" name="submit" value="Register" />
+            </form>
+
+    </body>
+</html>

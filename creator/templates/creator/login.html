@@ -6,7 +6,7 @@
             <h3>Error logging in: {{ error_message }}</h3>
         {% endif %}
 
-        <form id="login_form" method="post" action="/main/login">
+        <form id="login_form" method="post" action="{% url 'creator:login_user' %}">
             {% csrf_token %}
             Username: <input type="text" name="username" value="" size="50" />
             <br />

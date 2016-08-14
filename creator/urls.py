@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^user/(?P<pk>[0-9]+)/$', views.UserView.as_view(), name='user'),
     url(r'^game/(?P<pk>[0-9]+)/$', views.GameView.as_view(), name='game'),
     url(r'^get_clue/$', views.get_clue, name='get_clue'),
+    url(r'^register/$', views.register_user, name='register_user'),
 ]

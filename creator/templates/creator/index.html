@@ -2,8 +2,11 @@
 
 <link rel="stylesheet" type="text/css" href="{% static 'creator/styles.css' %}" />
 
+<h1>Welcome to Jeopardy Creator!</h1>
+
 {% if user.is_authenticated %}
     <h4><a href="{% url 'creator:logout_user' %}">Logout</a></h4>
 {% else %}
+    <h4><a href="{% url 'creator:register_user' %}">Register</a></h4>
     <h4><a href="{% url 'creator:login_user' %}">Login</a></h4>
 {% endif %}

@@ -1,3 +1,5 @@
+<h1>Welcome to Jeopardy Creator, {{ user.username }}!</h1>
+
 {% if user.is_authenticated %}
     <h4><a href="{% url 'creator:logout_user' %}">Logout</a></h4>
 {% else %}
